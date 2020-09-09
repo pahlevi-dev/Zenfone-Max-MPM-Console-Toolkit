@@ -8,7 +8,7 @@
 #                 The Firefox Flasher
 #                 The Firefox Foundation
 # Created time:   July 9, 2020       8:21am
-# Modified time:  September 7, 2020  6:40am
+# Modified time:  September 9, 2020  10:01pm
 #
 #
 # Description:
@@ -251,7 +251,7 @@ function check-unlock()
 	print_console "Checking the device bootloader..."
 	CURRENT_RESULT=true
 	unlock_result=$(fastboot oem device-info 2>&1 | grep "Device unlocked:" | cut -f 4 -d ' ')
-	unlock_critical_result=$(fastboot oem device-info 2>&1 | grep "Device critical unlocked:" | cut -f 4 -d ' ')
+	unlock_critical_result=$(fastboot oem device-info 2>&1 | grep "Device critical unlocked:" | cut -f 5 -d ' ')
 
 	if [ -z $unlock_result ]; then
 		unlock_result=false
@@ -358,26 +358,22 @@ function flash-twrp()
 		case $choice in
 			1 )		if [ "$devices_codename" == "X00P" ]; then
 						if ! [ -f "$BASEDIR/recovery/twrp_X00P.img" ]; then
-							curl -o "$BASEDIR/recovery/twrp_X00P.img" \
-									https://dl.twrp.me/X00P/twrp-3.4.0-0-X00P.img
+							curl -o "$BASEDIR/recovery/twrp_X00P.img" https://dl.twrp.me/X00P/twrp-3.4.0-0-X00P.img
 						fi
 						recoveryimg="$BASEDIR/recovery/twrp_X00P.img"
 					elif [ "$devices_codename" == "X01AD" ]; then
 						if ! [ -f "$BASEDIR/recovery/twrp_X01AD.img" ]; then
-							curl -o "$BASEDIR/recovery/twrp_X01AD.img" \
-									https://dl.twrp.me/X01AD/twrp-3.4.0-0-X01AD.img
+							curl -o "$BASEDIR/recovery/twrp_X01AD.img" https://dl.twrp.me/X01AD/twrp-3.4.0-0-X01AD.img
 						fi
 						recoveryimg="$BASEDIR/recovery/twrp_X01AD.img"
 					elif [ "$devices_codename" == "X00T" ]; then
 						if ! [ -f "$BASEDIR/recovery/twrp_X00T.img" ]; then
-							curl -o "$BASEDIR/recovery/twrp_X00T.img" \
-									https://ava3.androidfilehost.com/dl/9pvhlHZgD_gyFBl8eWNkWg/1598129017/6006931924117881962/twrp-3.3.1-0-X00T-20190526.img
+							curl -o "$BASEDIR/recovery/twrp_X00T.img" https://ava3.androidfilehost.com/dl/9pvhlHZgD_gyFBl8eWNkWg/1598129017/6006931924117881962/twrp-3.3.1-0-X00T-20190526.img
 						fi
 						recoveryimg="$BASEDIR/recovery/twrp_X00T.img"
 					elif [ "$devices_codename" == "X01BD" ]; then
 						if ! [ -f "$BASEDIR/recovery/twrp_X01BD.img" ]; then
-							curl -o "$BASEDIR/recovery/twrp_X01BD.img" \
-									https://dl.twrp.me/X01BD/twrp-3.4.0-0-X01BD.img
+							curl -o "$BASEDIR/recovery/twrp_X01BD.img" https://dl.twrp.me/X01BD/twrp-3.4.0-0-X01BD.img
 						fi
 						recoveryimg="$BASEDIR/recovery/twrp_X01BD.img"
 					fi
@@ -389,8 +385,7 @@ function flash-twrp()
 						continue
 					elif [ "$devices_codename" == "X01AD" ]; then
 						if ! [ -f "$BASEDIR/recovery/ofox_X01AD.img" ]; then
-							curl -o "$BASEDIR/tmp/ofox.zip" \
-									https://files.orangefox.tech/OrangeFox-Stable/X01AD/OrangeFox-R10.0-8.1-Stable-X01AD.zip
+							curl -o "$BASEDIR/tmp/ofox.zip" https://files.orangefox.download/OrangeFox-Stable/x01ad/OrangeFox-R10.0-8.1-Stable-X01AD.zip
 							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/recovery.img" "$BASEDIR/recovery/ofox_X01AD.img"
 							rm -f "$BASEDIR/tmp/ofox.zip"
@@ -398,8 +393,7 @@ function flash-twrp()
 						recoveryimg="$BASEDIR/recovery/ofox_X01AD.img"
 					elif [ "$devices_codename" == "X00T" ]; then
 						if ! [ -f "$BASEDIR/recovery/ofox_X00T.img" ]; then
-							curl -o "$BASEDIR/tmp/ofox.zip" \
-									https://files.orangefox.tech/OrangeFox-Stable/x00t/OrangeFox-R10.1_7-Stable-X00T.zip
+							curl -o "$BASEDIR/tmp/ofox.zip" https://files.orangefox.download/OrangeFox-Stable/x00t/OrangeFox-R11.0_2-Stable-X00T.zip
 							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/recovery.img" "$BASEDIR/recovery/ofox_X00T.img"
 							rm -f "$BASEDIR/tmp/ofox.zip"
@@ -407,8 +401,7 @@ function flash-twrp()
 						recoveryimg="$BASEDIR/recovery/ofox_X00T.img"
 					elif [ "$devices_codename" == "X01BD" ]; then
 						if ! [ -f "$BASEDIR/recovery/ofox_X01BD.img" ]; then 
-							curl -o "$BASEDIR/tmp/ofox.zip" \
-									https://files.orangefox.tech/OrangeFox-Stable/x01bd/OrangeFox-R10.1_14-Stable-X01BD.zip
+							curl -o "$BASEDIR/tmp/ofox.zip" https://files.orangefox.download/OrangeFox-Stable/x01bd/OrangeFox-R11.0_0-Stable-X01BD.zip
 							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/recovery.img" "$BASEDIR/recovery/ofox_X01BD.img"
 							rm -f "$BASEDIR/tmp/ofox.zip"
@@ -419,8 +412,7 @@ function flash-twrp()
 					;;
 			3 )		if [ "$devices_codename" == "X00P" ]; then
 						if ! [ -f "$BASEDIR/recovery/pbrp_X00P.img" ]; then
-							curl -o "$BASEDIR/tmp/pbrp.zip" \
-									https://master.dl.sourceforge.net/project/pbrp/X00P/PBRP-X00P-3.0.0-20200804-1432-OFFICIAL.zip
+							curl -o "$BASEDIR/tmp/pbrp.zip" https://master.dl.sourceforge.net/project/pbrp/X00P/PBRP-X00P-3.0.0-20200804-1432-OFFICIAL.zip
 							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/TWRP/recovery.img" "$BASEDIR/recovery/pbrp_X00P.img"
 							rm -rf "$BASEDIR/recovery/TWRP"
@@ -429,8 +421,7 @@ function flash-twrp()
 						recoveryimg="$BASEDIR/recovery/pbrp_X00P.img"
 					elif [ "$devices_codename" == "X01AD" ]; then
 						if ! [ -f "$BASEDIR/recovery/pbrp_X01AD.img" ]; then
-							curl -o "$BASEDIR/tmp/pbrp.zip" \
-									https://master.dl.sourceforge.net/project/pbrp/X01AD/PitchBlack-X01AD-2.9.0-20190605-1123-OFFICIAL.zip
+							curl -o "$BASEDIR/tmp/pbrp.zip" https://master.dl.sourceforge.net/project/pbrp/X01AD/PitchBlack-X01AD-2.9.0-20190605-1123-OFFICIAL.zip
 							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/TWRP/recovery.img" "$BASEDIR/recovery/pbrp_X01AD.img"
 							rm -rf "$BASEDIR/recovery/TWRP"
@@ -439,8 +430,7 @@ function flash-twrp()
 						recoveryimg="$BASEDIR/recovery/pbrp_X01AD.img"
 					elif [ "$devices_codename" == "X00T" ]; then
 						if ! [ -f "$BASEDIR/recovery/pbrp_X00T.img" ]; then
-							curl -o "$BASEDIR/tmp/pbrp.zip" \
-									https://tenet.dl.sourceforge.net/project/pbrp/X00T/PBRP-X00T-3.0.0-20200730-0649-OFFICIAL.zip
+							curl -o "$BASEDIR/tmp/pbrp.zip" https://tenet.dl.sourceforge.net/project/pbrp/X00T/PBRP-X00T-3.0.0-20200730-0649-OFFICIAL.zip
 							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/TWRP/recovery.img" "$BASEDIR/recovery/pbrp_X00T.img"
 							rm -rf "$BASEDIR/recovery/TWRP"
@@ -449,8 +439,7 @@ function flash-twrp()
 						recoveryimg="$BASEDIR/recovery/pbrp_X00T.img"
 					elif [ "$devices_codename" == "X01BD" ]; then
 						if ! [ -f "$BASEDIR/recovery/pbrp_X01BD.img" ]; then
-							curl -o "$BASEDIR/tmp/pbrp.zip" \
-									https://tenet.dl.sourceforge.net/project/pbrp/X01BD/PBRP-X01BD-3.0.0-20200730-0914-OFFICIAL.zip
+							curl -o "$BASEDIR/tmp/pbrp.zip" https://tenet.dl.sourceforge.net/project/pbrp/X01BD/PBRP-X01BD-3.0.0-20200730-0914-OFFICIAL.zip
 							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/TWRP/recovery.img" "$BASEDIR/recovery/pbrp_X01BD.img"
 							rm -rf "$BASEDIR/recovery/TWRP"
