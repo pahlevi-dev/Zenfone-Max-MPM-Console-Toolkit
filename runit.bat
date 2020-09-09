@@ -14,7 +14,7 @@
 :: Zenfone Max Series/Max Pro Series Console Toolkit
 ::
 :: Date/Time Created:          07/09/2020  2:48pm
-:: Date/Time Modified:         09/07/2020  6:40am
+:: Date/Time Modified:         09/09/2020  10:06pm
 :: Operating System Created:   Windows 10 Pro
 ::
 :: This script created by:
@@ -723,7 +723,7 @@ if [%choice%] == [2]  (
 		goto flash-twrp
 	) else if [%devices_codename%] == [X01AD] (
 		if not exist "%BASEDIR%\recovery\ofox_X01AD.img" (
-			wget -O "%BASEDIR%\tmp\ofox.zip" https://files.orangefox.tech/OrangeFox-Stable/X01AD/OrangeFox-R10.0-8.1-Stable-X01AD.zip
+			wget -O "%BASEDIR%\tmp\ofox.zip" hhttps://files.orangefox.download/OrangeFox-Stable/x01ad/OrangeFox-R10.0-8.1-Stable-X01AD.zip
 			7z -ao -x -o "%BASEDIR%\recovery" "%BASEDIR%\tmp\ofox.zip" recovery.img
 			move "%BASEDIR%\recovery\recovery.img" "%BASEDIR%\recovery\ofox_X01AD.img"
 			del /q "%BASEDIR\tmp\ofox.zip"
@@ -731,7 +731,7 @@ if [%choice%] == [2]  (
 		set "recoveryimg=%BASEDIR%\recovery\ofox_X01AD.img"
 	) else if [%devices_codename%] == [X00T] (
 		if not exist "%BASEDIR%\recovery\ofox_X00T.img" (
-			wget -O "%BASEDIR%\tmp\ofox.zip" https://files.orangefox.tech/OrangeFox-Stable/x00t/OrangeFox-R10.1_7-Stable-X00T.zip
+			wget -O "%BASEDIR%\tmp\ofox.zip" https://files.orangefox.download/OrangeFox-Stable/x00t/OrangeFox-R11.0_2-Stable-X00T.zip
 			7z -ao -x -o "%BASEDIR%\recovery" "%BASEDIR%\tmp\ofox.zip" recovery.img
 			move "%BASEDIR%\recovery\recovery.img" "%BASEDIR%\recovery\ofox_X00T.img"
 			del /q "%BASEDIR\tmp\ofox.zip"
@@ -739,7 +739,7 @@ if [%choice%] == [2]  (
 		set "recoveryimg=%BASEDIR%\recovery\ofox_X00T.img"
 	) else if [%devices_codename%] == [X01BD] (
 		if not exist "%BASEDIR%\recovery\ofox_X01BD.img" (
-			wget -O "%BASEDIR%\tmp\ofox.zip" https://files.orangefox.tech/OrangeFox-Stable/x01bd/OrangeFox-R10.1_14-Stable-X01BD.zip
+			wget -O "%BASEDIR%\tmp\ofox.zip" https://files.orangefox.download/OrangeFox-Stable/x01bd/OrangeFox-R11.0_0-Stable-X01BD.zip
 			7z -ao -x -o "%BASEDIR%\recovery" "%BASEDIR%\tmp\ofox.zip" recovery.img
 			move "%BASEDIR%\recovery\recovery.img" "%BASEDIR%\recovery\ofox_X01BD.img"
 			del /q "%BASEDIR\tmp\ofox.zip"
