@@ -7,8 +7,8 @@
 # Created by:     Faizal Hamzah
 #                 The Firefox Flasher
 #                 The Firefox Foundation
-# Created time:   July 9, 2020         8:21am
-# Modified time:  September 15, 2020   3:21am
+# Created time:   July 9, 2020       8:21am
+# Modified time:  October 9, 2020    1:03am
 #
 #
 # Description:
@@ -359,14 +359,14 @@ function flash-twrp()
 			1 )		if [ "$devices_codename" == "X00P" ]; then
 						if ! [ -f "$BASEDIR/recovery/twrp_X00P.img" ]; then
 							curl -o "$BASEDIR/recovery/twrp_X00P.img" \
-								 --referer 'https://dl.twrp.me/X00P/twrp-3.4.0-0-X00P.img' \
+								 --referer https://dl.twrp.me/X00P/twrp-3.4.0-0-X00P.img \
 								 -k https://dl.twrp.me/X00P/twrp-3.4.0-0-X00P.img
 						fi
 						recoveryimg="$BASEDIR/recovery/twrp_X00P.img"
 					elif [ "$devices_codename" == "X01AD" ]; then
 						if ! [ -f "$BASEDIR/recovery/twrp_X01AD.img" ]; then
 							curl -o "$BASEDIR/recovery/twrp_X01AD.img" \
-								 -referer 'https://dl.twrp.me/X01AD/twrp-3.4.0-0-X01AD.img' \
+								 -referer https://dl.twrp.me/X01AD/twrp-3.4.0-0-X01AD.img \
 								 -k https://dl.twrp.me/X01AD/twrp-3.4.0-0-X01AD.img
 						fi
 						recoveryimg="$BASEDIR/recovery/twrp_X01AD.img"
@@ -374,10 +374,10 @@ function flash-twrp()
 						if ! [ -f "$BASEDIR/recovery/twrp_X00T.img" ]; then
 							LINKID="1eJFgeK72rEEUPDxR_0EwAKuoXTYI6E3b"
 							curl -sLc "$BASEDIR/tmp/cookie" \
-								   https://drive.google.com/uc\?export\=download\&id\=$LINKID >& /dev/null
+								 	  https://drive.google.com/uc?export=download\&id=$LINKID >& /dev/null
 							curl -o "$BASEDIR/recovery/twrp_X00T.img" \
 								 -Lb "$BASEDIR/tmp/cookie" \
-									  https://drive.google.com/uc\?export\=download\&confirm\=$(awk '/download/ {print $NF}' \"$BASEDIR/tmp/cookie\")\&id\=$LINKID
+									  https://drive.google.com/uc?export=download\&confirm=$(awk '/download/ {print $NF}' \"$BASEDIR/tmp/cookie\")\&id=$LINKID
 							rm -f "$BASEDIR/tmp/cookie"
 							unset LINKID
 						fi
@@ -385,7 +385,7 @@ function flash-twrp()
 					elif [ "$devices_codename" == "X01BD" ]; then
 						if ! [ -f "$BASEDIR/recovery/twrp_X01BD.img" ]; then
 							curl -o "$BASEDIR/recovery/twrp_X01BD.img" \
-								 --referer 'https://dl.twrp.me/X01BD/twrp-3.4.0-0-X01BD.img' \
+								 --referer https://dl.twrp.me/X01BD/twrp-3.4.0-0-X01BD.img \
 								 -k https://dl.twrp.me/X01BD/twrp-3.4.0-0-X01BD.img
 						fi
 						recoveryimg="$BASEDIR/recovery/twrp_X01BD.img"
@@ -400,7 +400,8 @@ function flash-twrp()
 						if ! [ -f "$BASEDIR/recovery/ofox_X01AD.img" ]; then
 							curl -o "$BASEDIR/tmp/ofox.zip" \
 									 https://files.orangefox.download/OrangeFox-Stable/x01ad/OrangeFox-R10.0-8.1-Stable-X01AD.zip
-							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img -d "$BASEDIR/recovery/"
+							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img \
+								  -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/recovery.img" "$BASEDIR/recovery/ofox_X01AD.img"
 							rm -f "$BASEDIR/tmp/ofox.zip"
 						fi
@@ -409,7 +410,8 @@ function flash-twrp()
 						if ! [ -f "$BASEDIR/recovery/ofox_X00T.img" ]; then
 							curl -o "$BASEDIR/tmp/ofox.zip" \
 									 https://files.orangefox.download/OrangeFox-Stable/x00t/OrangeFox-R11.0_2-Stable-X00T.zip
-							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img -d "$BASEDIR/recovery/"
+							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img \
+								  -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/recovery.img" "$BASEDIR/recovery/ofox_X00T.img"
 							rm -f "$BASEDIR/tmp/ofox.zip"
 						fi
@@ -418,7 +420,8 @@ function flash-twrp()
 						if ! [ -f "$BASEDIR/recovery/ofox_X01BD.img" ]; then 
 							curl -o "$BASEDIR/tmp/ofox.zip" \
 									 https://files.orangefox.download/OrangeFox-Stable/x01bd/OrangeFox-R11.0_0-Stable-X01BD.zip
-							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img -d "$BASEDIR/recovery/"
+							unzip -o "$BASEDIR/tmp/ofox.zip" recovery.img \
+								  -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/recovery.img" "$BASEDIR/recovery/ofox_X01BD.img"
 							rm -f "$BASEDIR/tmp/ofox.zip"
 						fi
@@ -430,7 +433,8 @@ function flash-twrp()
 						if ! [ -f "$BASEDIR/recovery/pbrp_X00P.img" ]; then
 							curl -o "$BASEDIR/tmp/pbrp.zip" \
 									 https://master.dl.sourceforge.net/project/pbrp/X00P/PBRP-X00P-3.0.0-20200804-1432-OFFICIAL.zip
-							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img -d "$BASEDIR/recovery/"
+							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img \
+								  -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/TWRP/recovery.img" "$BASEDIR/recovery/pbrp_X00P.img"
 							rm -rf "$BASEDIR/recovery/TWRP"
 							rm -f "$BASEDIR/tmp/pbrp.zip"
@@ -440,7 +444,8 @@ function flash-twrp()
 						if ! [ -f "$BASEDIR/recovery/pbrp_X01AD.img" ]; then
 							curl -o "$BASEDIR/tmp/pbrp.zip" \
 									 https://master.dl.sourceforge.net/project/pbrp/X01AD/PitchBlack-X01AD-2.9.0-20190605-1123-OFFICIAL.zip
-							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img -d "$BASEDIR/recovery/"
+							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img \
+								  -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/TWRP/recovery.img" "$BASEDIR/recovery/pbrp_X01AD.img"
 							rm -rf "$BASEDIR/recovery/TWRP"
 							rm -f "$BASEDIR/tmp/pbrp.zip"
@@ -450,7 +455,8 @@ function flash-twrp()
 						if ! [ -f "$BASEDIR/recovery/pbrp_X00T.img" ]; then
 							curl -o "$BASEDIR/tmp/pbrp.zip" \
 									 https://tenet.dl.sourceforge.net/project/pbrp/X00T/PBRP-X00T-3.0.0-20200730-0649-OFFICIAL.zip
-							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img -d "$BASEDIR/recovery/"
+							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img \
+								  -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/TWRP/recovery.img" "$BASEDIR/recovery/pbrp_X00T.img"
 							rm -rf "$BASEDIR/recovery/TWRP"
 							rm -f "$BASEDIR/tmp/pbrp.zip"
@@ -460,7 +466,8 @@ function flash-twrp()
 						if ! [ -f "$BASEDIR/recovery/pbrp_X01BD.img" ]; then
 							curl -o "$BASEDIR/tmp/pbrp.zip" \
 									 https://tenet.dl.sourceforge.net/project/pbrp/X01BD/PBRP-X01BD-3.0.0-20200730-0914-OFFICIAL.zip
-							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img -d "$BASEDIR/recovery/"
+							unzip -o "$BASEDIR/tmp/pbrp.zip" TWRP/recovery.img \
+								  -d "$BASEDIR/recovery/"
 							mv "$BASEDIR/recovery/TWRP/recovery.img" "$BASEDIR/recovery/pbrp_X01BD.img"
 							rm -rf "$BASEDIR/recovery/TWRP"
 							rm -f "$BASEDIR/tmp/pbrp.zip"
@@ -555,13 +562,15 @@ function flash-root ()
 		
 		case $choice in
 			1 )	if ! [ -f "$BASEDIR/data/supersu.zip" ]; then
-					curl -o "$BASEDIR/data/supersu.zip" http://supersuroot.org/downloads/SuperSU-v2.82-201705271822.zip
+					curl -Lo "$BASEDIR/data/supersu.zip" \
+							  http://supersuroot.org/downloads/SuperSU-v2.82-201705271822.zip
 				fi
 				rootsel=SuperSU
 				rootzip="$BASEDIR/data/supersu.zip"
 				;;
 			2 )	if ! [ -f "$BASEDIR/data/magisk.zip" ]; then
-					curl -o "$BASEDIR/data/magisk.zip" https://github.com/topjohnwu/Magisk/releases/download/v20.4/Magisk-v20.4.zip
+					curl -Lo "$BASEDIR/data/magisk.zip" \
+							  https://github.com/topjohnwu/Magisk/releases/download/v20.4/Magisk-v20.4.zip
 				fi
 				rootsel=Magisk
 				rootzip="$BASEDIR/data/magisk.zip"
@@ -683,6 +692,8 @@ function print_console ()
 BASEFILE=$(basename "$0")
 BASEDIR=$(dirname "$0")
 PATH="$BASEDIR/bin:$PATH"
+DISTRIBUTION="$( cat /etc/os-release | grep "\<ID*" | cut -f 2 -d '=' )"
+DISTRIBUTION_LIKE="$( cat /etc/os-release | grep "\<ID_LIKE*" | cut -f 2 -d '=' )"
 errorp="ERROR:"
 cautionp="CAUTION:"
 infop="INFORMATION:"
@@ -1044,35 +1055,46 @@ while true; do
 								fi
 								print_console "Downloading and installing..."
 								{
-									i=0
-									echo $i
-      								i=$(expr $i + 1)
 									print_console "Android Platform Tools (include ADB and Fastboot)"
 									echo 1
 									if ! [ -x $(command -v curl) ]; then
 										echo 18
-										>& /dev/null 2>&1 echo y | apt-get install curl || error=1
-										>& /dev/null 2>&1 echo y | yum install curl || error=1
-										>& /dev/null 2>&1 echo y | pacman -S curl || error=1
+										if [ "$DISTRIBUTION" = "debian" ] || [ "$DISTRIBUTION_LIKE" = "debian" ] || \
+        						    	   [ "$DISTRIBUTION" = "ubuntu" ] || [ "$DISTRIBUTION_LIKE" = "ubuntu" ]; then
+											>& /dev/null 2>&1 apt -y install curl || error=1
+										elif [ "$DISTRIBUTION" = "fedora" ] || [ "$DISTRIBUTION_LIKE" = "fedora" ] || \
+                 							 [ "$DISTRIBUTION" = "redhat" ] || [ "$DISTRIBUTION_LIKE" = "redhat" ]; then
+											>& /dev/null 2>&1 dnf -y install curl || error=1
+										elif [ "$DISTRIBUTION" = "arch" ] || [ "$DISTRIBUTION_LIKE" = "arch" ]; then
+											>& /dev/null 2>&1 pacman -Sy curl || error=1
+										fi
 										echo 20
 									elif [ -x $(command -v curl) ]; then
 										echo 23
 										if ! [ -f "$BASEDIR/bin/pkg/android-platform-tools-linux.zip" ]; then
 											echo 24
-											>& /dev/null 2>&1 curl -o "$BASEDIR/bin/pkg/android-platform-tools-linux.zip" https://dl.google.com/android/repository/platform-tools_r30.0.4-linux.zip?hl=id
+											curl -so "$BASEDIR/bin/pkg/android-platform-tools-linux.zip" \
+													  https://dl.google.com/android/repository/platform-tools_r30.0.4-linux.zip?hl=id
 											echo 37
 						    			fi
 										if [ -f "$BASEDIR/bin/pkg/android-platform-tools-linux.zip" ]; then
 											if ! [ -x $(command -v unzip) ]; then
 												echo 38
-												>& /dev/null 2>&1 echo y | apt-get install zip || error=1
-												>& /dev/null 2>&1 echo y | yum install zip || error=1
-												>& /dev/null 2>&1 echo y | pacman -S zip || error=1
+												if [ "$DISTRIBUTION" = "debian" ] || [ "$DISTRIBUTION_LIKE" = "debian" ] || \
+        						    			   [ "$DISTRIBUTION" = "ubuntu" ] || [ "$DISTRIBUTION_LIKE" = "ubuntu" ]; then
+													>& /dev/null 2>&1 apt -y install zip || error=1
+												elif [ "$DISTRIBUTION" = "fedora" ] || [ "$DISTRIBUTION_LIKE" = "fedora" ] || \
+                 									 [ "$DISTRIBUTION" = "redhat" ] || [ "$DISTRIBUTION_LIKE" = "redhat" ]; then
+													>& /dev/null 2>&1 dnf -y install zip || error=1
+												elif [ "$DISTRIBUTION" = "arch" ] || [ "$DISTRIBUTION_LIKE" = "arch" ]; then
+													>& /dev/null 2>&1 pacman -Sy zip || error=1
+												fi
 												echo 40
 											fi
 											echo 41
 											>& /dev/null 2>&1 rm -rf "$BASEDIR/bin/platform-tools/"
-											>& /dev/null 2>&1 unzip -o "$BASEDIR/bin/pkg/android-platform-tools-linux.zip" -d "$BASEDIR/bin/"
+											>& /dev/null 2>&1 unzip -o "$BASEDIR/bin/pkg/android-platform-tools-linux.zip" \
+																	-d "$BASEDIR/bin/"
 											echo 72
 											cd "$BASEDIR/bin"
 											ln -s platform-tools/adb adb
